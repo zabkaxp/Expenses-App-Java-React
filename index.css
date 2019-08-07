@@ -1,0 +1,76 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+.headerContainer {
+  display: flex;
+  justify-content: space-between;
+  background-color: darkcyan;
+  margin-bottom: 30px;
+}
+.headerContainer > ul {
+  list-style-type: none;
+  display: flex;
+}
+.headerContainer > ul > li {
+  padding: 10px 20px;
+  text-transform: uppercase;
+  color: white;
+}
+.headerContainer > ul > li:hover {
+  cursor: pointer;
+  color: lightblue;
+}
+
+.footerContainer {
+  display: flex;
+  background-color: darkcyan;
+  color: white;
+  justify-content: center;
+  padding: 20px 0;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+.loginContainer {
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+}
+.loginContainer > * {
+  margin: 15px 0;
+}
+
+.loginContainer > * > * {
+  padding: 5px 10px;
+}
+label {
+  width: 130px;
+}
+
+.loginSubmit {
+  border: none;
+  background-color: darkblue;
+  border-radius: 5px;
+  padding: 8px 18px;
+  color: white;
+  transition: 0.3s ease-in-out;
+}
+.loginSubmit:hover {
+  background-color: lightslategray;
+  cursor: pointer;
+}
+.invalidMessage {
+  padding: 10px 20px;
+  color: darkred;
+  background-color: lightcoral;
+}
