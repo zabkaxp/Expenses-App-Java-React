@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import AuthenticationService from "./AuthenticationService";
 
 class Login extends Component {
   state = {
@@ -10,10 +11,13 @@ class Login extends Component {
   loginSubmit = e => {
     e.preventDefault();
     if (this.state.login === "marta" && this.state.password === "password") {
-      console.log("l");
+      AuthenticationService.setSession(this.state.login);
+      this.props.history.push("/expenses");
     } else {
       this.setState({
-        message: "Invalid credentials, please try again"
+        message: "Invalid credentials, please try again",
+        password: "",
+        login: ""
       });
     }
   };
@@ -31,7 +35,6 @@ class Login extends Component {
     });
   };
   render() {
-      
     return (
       <div>
         <form className="loginContainer">
@@ -52,7 +55,7 @@ class Login extends Component {
           <div>
             <label htmlFor="password">Password</label>
             <input
-              value={this.state.passowrd}
+              value={this.state.password}
               onChange={this.passwordChange}
               id="password"
               type="password"
