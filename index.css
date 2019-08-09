@@ -121,3 +121,24 @@ table {
   color: red;
   cursor: pointer;
 }
+.welcome {
+  text-align: center;
+}
+.expensesHeader {
+  display: flex;
+  align-items: baseline;
+  font-weight: 700;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.fa-plus-circle {
+  color: yellowgreen;
+  margin-left: 10px;
+  font-size: 19px;
+  padding-top: 23px;
+}
+.fa-plus-circle:hover {
+  color: darkgreen;
+  cursor: pointer;
+}

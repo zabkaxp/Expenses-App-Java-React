@@ -17,7 +17,7 @@ class Header extends Component {
       <div className="headerContainer">
         <ul>
           <li>About</li>
-          <li>Expenses App</li>
+          {loggedIn && <li><Link to="/expenses">Expenses App</Link></li>}
         </ul>
 
         <ul>

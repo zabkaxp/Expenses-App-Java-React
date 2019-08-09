@@ -8,19 +8,31 @@ class ExpensesList extends Component {
     income: [],
     outcome: []
   };
-
+  editExpense = id => {
+    this.props.history.push(`/expenses/${id}`);
+  };
+  removeExpense = id => {
+    ExpensesService.deleteExpense(id, userName)
+      .then(response => this.refreshExpenses())
+      .catch(response => console.log("error deleting response" + response));
+  };
   componentDidMount() {
+    this.refreshExpenses();
+  }
+
+  refreshExpenses = () => {
+    this.setState({
+      income: [],
+      outcome: []
+    });
     ExpensesService.retrieveExpenses(userName)
       .then(response =>
         response.data.map(expense => {
           if (expense.type === "outcome") {
-            console.log("saved as outcome");
-
             this.setState({
               outcome: this.state.outcome.concat(expense)
             });
           } else if (expense.type === "income") {
-            console.log("saved as income");
             this.setState({
               income: this.state.income.concat(expense)
             });
@@ -28,16 +40,17 @@ class ExpensesList extends Component {
         })
       )
       .catch(response => console.log("error retriving data"));
-  }
+  };
   render() {
-    console.log(this.state.income);
-    console.log(this.state.outcome);
     return (
       <div className="listContainer">
         <h1>Expenses App</h1>
         <div className="tablesContainer">
           <div>
-            <h4>Income</h4>
+            <div className="expensesHeader">
+              <div>Income</div>
+              <i className="fas fa-plus-circle" />
+            </div>
             <table>
               <tbody>
                 <tr>
@@ -51,7 +64,20 @@ class ExpensesList extends Component {
                     <td className="expenseBox">
                       <div>&euro; {expense.amount}</div>
                       <div>
-                        <i class="fas fa-edit" /> <i class="fas fa-trash-alt" />
+                        <i
+                          onClick={() =>
+                            this.editExpense(
+                              expense.id,
+                              expense.description,
+                              expense.amount
+                            )
+                          }
+                          className="fas fa-edit"
+                        />
+                        <i
+                          onClick={() => this.removeExpense(expense.id)}
+                          className="fas fa-trash-alt"
+                        />
                       </div>
                     </td>
                   </tr>
@@ -60,7 +86,10 @@ class ExpensesList extends Component {
             </table>
           </div>
           <div>
-            <h4>Outcome</h4>
+            <div className="expensesHeader">
+              <div>Outcome</div>
+              <i className="fas fa-plus-circle" />
+            </div>
 
             <table>
               <tbody>
@@ -75,7 +104,20 @@ class ExpensesList extends Component {
                     <td className="expenseBox">
                       <div>&euro; {expense.amount}</div>
                       <div>
-                        <i class="fas fa-edit" /> <i class="fas fa-trash-alt" />
+                        <i
+                          onClick={() =>
+                            this.editExpense(
+                              expense.id,
+                              expense.description,
+                              expense.amount
+                            )
+                          }
+                          className="fas fa-edit"
+                        />{" "}
+                        <i
+                          onClick={() => this.removeExpense(expense.id)}
+                          className="fas fa-trash-alt"
+                        />
                       </div>
                     </td>
                   </tr>

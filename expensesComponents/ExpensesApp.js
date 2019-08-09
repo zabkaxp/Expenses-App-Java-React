@@ -5,6 +5,8 @@ import Footer from "./Footer";
 import Login from "./Login";
 import ExpensesList from "./ExpensesList";
 import AuthenticatedRoute from "./AuthenticatedRoute";
+import Welcome from "./Welcome";
+import Expense from "./Expense";
 
 const ExpensesApp = () => {
   return (
@@ -13,7 +15,10 @@ const ExpensesApp = () => {
         <Header />
         <Switch>
           <Route path="/login" component={Login} />
+          <AuthenticatedRoute path="/expenses/:id" component={Expense} />
           <AuthenticatedRoute path="/expenses" component={ExpensesList} />
+
+          <Route path="/" component={Welcome} />
         </Switch>
         <Footer />
       </Router>

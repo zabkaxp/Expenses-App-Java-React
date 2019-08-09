@@ -5,7 +5,7 @@ import { Route, Redirect } from "react-router-dom";
 class AuthenticatedRoute extends Component {
   render() {
     const user = Authentication.isUserLoggedIn();
-    console.log(user);
+
     if (user) {
       return (
         <div>

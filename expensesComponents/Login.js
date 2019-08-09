@@ -9,11 +9,12 @@ class Login extends Component {
   };
 
   loginSubmit = e => {
-    e.preventDefault();
     if (this.state.login === "marta" && this.state.password === "password") {
+      this.props.history.push("/");
+      window.location.reload(true);
       AuthenticationService.setSession(this.state.login);
-      this.props.history.push("/expenses");
     } else {
+      e.preventDefault();
       this.setState({
         message: "Invalid credentials, please try again",
         password: "",
