@@ -1,10 +1,9 @@
 package apps.expenses;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 @RestController
@@ -16,6 +15,22 @@ public class ExpensesResource {
 
     @GetMapping("/users/{username}/expenses")
     public List<Expense> showAllexpenses(@PathVariable String username){
+
         return expensesService.showExpenses();
+    }
+    @DeleteMapping("users/{username}/expenses/{id}")
+    public Void removeExpense(@PathVariable String username, @PathVariable long id){
+
+        Expense newExpense = expensesService.removeExpense(id);
+        if(newExpense!=null){
+             ResponseEntity.noContent().build();
+        }else{
+            ResponseEntity.notFound().build();
+        }return null;
+    }
+
+    @GetMapping("users/{username}/expenses/{id}")
+    public Expense retieveExpense(@PathVariable String username, @PathVariable long id){
+        return expensesService.retrieveExpense(id);
     }
 }

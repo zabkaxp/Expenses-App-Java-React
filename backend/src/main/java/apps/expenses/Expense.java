@@ -1,6 +1,6 @@
 package apps.expenses;
 
-import java.util.Date;
+import java.util.Objects;
 
 public class Expense {
 
@@ -9,8 +9,6 @@ public class Expense {
     private String username;
     double amount;
     private String type;
-
-
 
     public Expense(long id, String description, String username, double amount, String type) {
         this.id = id;
@@ -60,4 +58,20 @@ public class Expense {
         this.type = type;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Expense expense = (Expense) o;
+        return id == expense.id &&
+                Double.compare(expense.amount, amount) == 0 &&
+                Objects.equals(description, expense.description) &&
+                Objects.equals(username, expense.username) &&
+                Objects.equals(type, expense.type);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, description, username, amount, type);
+    }
 }

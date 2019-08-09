@@ -20,4 +20,23 @@ public class ExpenseHardcodedService {
 public List<Expense> showExpenses(){
         return expenses;
 }
+
+public Expense removeExpense(long id) {
+    for (Expense expense : expenses) {
+        if (id == expense.getId()) {
+            if (expenses.remove(expense)) {
+                return expense;
+            }
+        }
+    }return null;
+}
+public Expense retrieveExpense(long id){
+        for(Expense expense: expenses){
+            if(id==expense.getId()){
+                return expense;
+            }
+        }
+    return null;
+}
+
 }
