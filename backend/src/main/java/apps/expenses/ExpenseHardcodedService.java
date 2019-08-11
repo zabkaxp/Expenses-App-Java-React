@@ -39,4 +39,17 @@ public Expense retrieveExpense(long id){
     return null;
 }
 
+public Expense editExpense(Expense newExpense){
+removeExpense(newExpense.getId());
+        expenses.add(newExpense);
+
+return newExpense;
+}
+
+public Expense addExpense(Expense expense){
+        expense.setId(++counter);
+        expenses.add(expense);
+        return expense;
+}
+
 }
