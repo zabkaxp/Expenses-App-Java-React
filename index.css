@@ -142,3 +142,19 @@ table {
   color: darkgreen;
   cursor: pointer;
 }
+fieldset {
+  border: none;
+}
+fieldset > label {
+  margin-right: 15px;
+}
+form > button {
+  margin: 20px;
+}
+
+input {
+  padding: 5px 10px;
+}
+.section {
+  padding: 20px 50px;
+}

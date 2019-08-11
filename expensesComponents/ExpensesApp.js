@@ -14,11 +14,10 @@ const ExpensesApp = () => {
       <Router>
         <Header />
         <Switch>
+          <Route path="/welcome" component={Welcome} />
           <Route path="/login" component={Login} />
           <AuthenticatedRoute path="/expenses/:id" component={Expense} />
           <AuthenticatedRoute path="/expenses" component={ExpensesList} />
-
-          <Route path="/" component={Welcome} />
         </Switch>
         <Footer />
       </Router>

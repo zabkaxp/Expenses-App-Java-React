@@ -16,8 +16,14 @@ class Header extends Component {
     return (
       <div className="headerContainer">
         <ul>
-          <li>About</li>
-          {loggedIn && <li><Link to="/expenses">Expenses App</Link></li>}
+          <li>
+            <Link to="/welcome">About</Link>
+          </li>
+          {loggedIn && (
+            <li>
+              <Link to="/expenses">Expenses App</Link>
+            </li>
+          )}
         </ul>
 
         <ul>

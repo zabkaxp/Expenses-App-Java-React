@@ -21,6 +21,14 @@ class ExpensesService {
       expense
     );
   };
+
+  addExpense = (username, expense) => {
+    console.log(expense);
+    return axios.post(
+      `http://localhost:8080/users/${username}/expenses`,
+      expense
+    );
+  };
 }
 
 export default new ExpensesService();

@@ -6,7 +6,12 @@ const userName = AuthenticationService.getUsername();
 class ExpensesList extends Component {
   state = {
     income: [],
-    outcome: []
+    outcome: [],
+    total: 0
+  };
+
+  addExpense = type => {
+    this.props.history.push(`/expenses/-1`);
   };
   editExpense = id => {
     this.props.history.push(`/expenses/${id}`);
@@ -19,11 +24,24 @@ class ExpensesList extends Component {
   componentDidMount() {
     this.refreshExpenses();
   }
-
+  calculateTotals = () => {
+    this.setState({ total: 0 });
+    let incomeTotal = 0;
+    let outcomeTotal = 0;
+    this.state.income.map(
+      income => (incomeTotal = incomeTotal + income.amount)
+    );
+    this.state.outcome.map(
+      outcome => (outcomeTotal = outcomeTotal + outcome.amount)
+    );
+    const total = incomeTotal - outcomeTotal;
+    this.setState({ total });
+  };
   refreshExpenses = () => {
     this.setState({
       income: [],
-      outcome: []
+      outcome: [],
+      total: 0
     });
     ExpensesService.retrieveExpenses(userName)
       .then(response =>
@@ -39,17 +57,21 @@ class ExpensesList extends Component {
           }
         })
       )
+      .then(response => this.calculateTotals())
       .catch(response => console.log("error retriving data"));
   };
   render() {
     return (
       <div className="listContainer">
-        <h1>Expenses App</h1>
+        <h1>Total available: &euro;{this.state.total}</h1>
         <div className="tablesContainer">
           <div>
             <div className="expensesHeader">
               <div>Income</div>
-              <i className="fas fa-plus-circle" />
+              <i
+                onClick={() => this.addExpense("income")}
+                className="fas fa-plus-circle"
+              />
             </div>
             <table>
               <tbody>
@@ -88,7 +110,10 @@ class ExpensesList extends Component {
           <div>
             <div className="expensesHeader">
               <div>Outcome</div>
-              <i className="fas fa-plus-circle" />
+              <i
+                onClick={() => this.addExpense("outcome")}
+                className="fas fa-plus-circle"
+              />
             </div>
 
             <table>
